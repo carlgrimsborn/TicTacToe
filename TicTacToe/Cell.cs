@@ -12,10 +12,14 @@ namespace TicTacToe
         Circle
     }
 
-    internal class Cell(int index)
+    internal class Cell
     {
+        public Cell(int index)
+        {
+            this.CellValue = index;
+        }
         public VariantType Variant { get; set; } = VariantType.Circle;
-        public int CellValue { get; set; } = index;
+        public int CellValue { get; set; }
 
 
     }
