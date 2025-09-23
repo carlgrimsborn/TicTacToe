@@ -6,21 +6,33 @@ using System.Threading.Tasks;
 
 namespace TicTacToe
 {
-    enum VariantType
+    public enum CellOwner
     {
-        Cross,
-        Circle
+        Player1,
+        Player2,
+        Undecided
     }
 
-    internal class Cell
+    public class Cell
     {
         public Cell(int index)
         {
             this.CellValue = index;
         }
-        public VariantType Variant { get; set; } = VariantType.Circle;
-        public int CellValue { get; set; }
+        public CellOwner Owner { get; set; } = CellOwner.Undecided;
+        public int CellValue { get; private set; }
 
-
+        public static string GenerateTictacSign(Cell cell)
+        {
+            switch(cell.Owner)
+            {
+                case CellOwner.Player1:
+                    return "X";
+                case CellOwner.Player2:
+                    return "O";
+                default:
+                    return cell.CellValue.ToString();
+            }
+        }
     }
 }
