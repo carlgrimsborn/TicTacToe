@@ -9,11 +9,14 @@ namespace TicTacToe
     enum VariantType
     {
         Cross,
-        Cirle
+        Circle
     }
 
-    internal class TicTacSquare
+    internal class Cell(int index)
     {
-        public int Variant { get; set; }
+        public VariantType Variant { get; set; } = VariantType.Circle;
+        public int CellValue { get; set; } = index;
+
+
     }
 }
