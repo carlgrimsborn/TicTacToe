@@ -9,6 +9,6 @@ namespace TicTacToe
     internal class Logic
     {
         //Class för gameboard
-        //Class
+        //Class 
     }
 }
