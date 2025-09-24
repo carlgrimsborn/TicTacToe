@@ -15,6 +15,7 @@ namespace TicTacToe
                 PrintBoard(cells);
                 UserInput(cells);
                 CalculateWinCondition(cells);
+                Console.Clear();
             }
             if (GameState.GameOver)
             {
