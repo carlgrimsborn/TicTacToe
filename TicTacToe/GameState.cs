@@ -89,7 +89,7 @@ namespace TicTacToe
                 PrintBoard(cells);
                 if (GameState.Winner == Winner.Tie)
                 {
-                    Console.WriteLine("It is a tie!");
+                    Console.WriteLine("\nIt is a tie!");
                     return;
                 }
                 else
@@ -103,6 +103,7 @@ namespace TicTacToe
         public static void PrintBoard(List<Cell> cells)
         {
             int j = 0;
+            Console.WriteLine("_____________");
             foreach (var cell in cells)
             {
                 Console.Write(Cell.GenerateTictacSign(cell));
@@ -113,6 +114,7 @@ namespace TicTacToe
                 }
                 j++;
             }
+            Console.WriteLine("_____________");
         }
 
         public static void UserInput(List<Cell> cells)
