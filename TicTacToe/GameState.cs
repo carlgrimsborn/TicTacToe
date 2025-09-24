@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,18 +14,25 @@ namespace TicTacToe
         Player1,
         Player2
     }
+    public enum Player
+    {
+        Player1,
+        Player2
+    }
+
     public static class GameState
     {
         public static bool GameOver { get; set; } = false;
         public static Winner Winner { get; set; } = Winner.Undecided;
+        public static Player CurrentPlayer { get; set; } = Player.Player1;
 
         public static void CalculateWinCondition(List<Cell> cells)
         {
 
             string[] winConditions = { "123", "456", "789", "741", "852", "963", "159", "753" };
 
-            var markedPlayer1Cells = cells.FindAll(cell => findMarked(cell, CellOwner.Player1));
-            var markedPlayer2Cells = cells.FindAll(cell => findMarked(cell, CellOwner.Player2));
+            List<Cell> markedPlayer1Cells = cells.FindAll(cell => findMarked(cell, CellOwner.Player1));
+            List<Cell> markedPlayer2Cells = cells.FindAll(cell => findMarked(cell, CellOwner.Player2));
 
             foreach (string winCondition in winConditions)
             {
@@ -66,6 +74,87 @@ namespace TicTacToe
                 GameState.GameOver = true;
             }
 
+        }
+
+        public static void RunGame(List<Cell> cells)
+        {
+            while (GameState.GameOver == false)
+            {
+                PrintBoard(cells);
+                UserInput(cells);
+                CalculateWinCondition(cells);
+            }
+            if (GameState.GameOver)
+            {
+                PrintBoard(cells);
+                if (GameState.Winner == Winner.Tie)
+                {
+                    Console.WriteLine("\nIt is a tie!");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("\nThe winner is {0}", GameState.Winner);
+                    return;
+                }
+            }
+        }
+
+        public static void PrintBoard(List<Cell> cells)
+        {
+            int j = 0;
+            Console.WriteLine("_____________");
+            foreach (var cell in cells)
+            {
+                Console.Write(Cell.GenerateTictacSign(cell));
+
+                if (j == 2 || j == 5 || j == 8)
+                {
+                    Console.WriteLine();
+                }
+                j++;
+            }
+            Console.WriteLine("_____________");
+        }
+
+        public static void UserInput(List<Cell> cells)
+        {
+            Console.WriteLine("\nYour turn {0}", GameState.CurrentPlayer);
+            Console.WriteLine("Enter key 1-9");
+
+            // Outgoing value from ReadLine. This is used as the cell index
+            int parsedInput = -1;
+
+            while (true)
+            {
+                // check if the input is an int
+                if (int.TryParse(Console.ReadLine(), out parsedInput))
+                {
+                    // check if the input is an index
+                    if (parsedInput >= 1 || parsedInput <= 9)
+                    {
+                        // check if cell is occupied
+                        if (cells[parsedInput - 1].Owner == CellOwner.Undecided)
+                        {
+                            break;
+                        }
+                        
+                    }
+                }
+            }
+            Console.WriteLine();
+
+            // manipulate cell array
+            if (GameState.CurrentPlayer == Player.Player1)
+            {
+                cells[parsedInput - 1].Owner = CellOwner.Player1;
+                GameState.CurrentPlayer = Player.Player2;
+            }
+            else
+            {
+                cells[parsedInput - 1].Owner = CellOwner.Player2;
+                GameState.CurrentPlayer = Player.Player1;
+            }
         }
 
         static bool findMarked(Cell cell, CellOwner searchVariant)
