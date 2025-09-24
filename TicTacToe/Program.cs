@@ -13,7 +13,7 @@
             }
 
             // run the game with the data
-            GameState.RunGame(cells);
+            GameActions.RunGame(cells);
         }
     }
 }
