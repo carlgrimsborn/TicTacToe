@@ -15,7 +15,7 @@ namespace TicTacToe
         {
 
             char whereToPutMarker = Convert.ToChar(playerChoice);
-            char marker = Convert.ToChar(currentMarker);
+            char playerMarker = Convert.ToChar(currentMarker);
             
             for (int i = 0; i < WinConditions.Length; i++) //Loopar igenom alla strängar i winConditions
             {
@@ -23,10 +23,13 @@ namespace TicTacToe
                 {
                     if (WinConditions[i][j] == whereToPutMarker) 
                     {
+                        
+                        
+                        
                         char[] winCondition = WinConditions[i].ToCharArray();
-                        winCondition[j] = marker;
-                        string replacement = new string(winCondition);
-                        WinConditions[i] = replacement;
+                        winCondition[j] = playerMarker;
+                        string winConditionStringWithNewMarker = new string(winCondition);
+                        WinConditions[i] = winConditionStringWithNewMarker;
                     }
                 }
             }
