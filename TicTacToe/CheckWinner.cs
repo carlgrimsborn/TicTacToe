@@ -8,7 +8,6 @@ namespace TicTacToe
 {
     public static class CheckWinner
     {
-        static string[] WinConditions = { "123", "456", "789", "741", "852", "963", "159", "753" }; //String[] med alla möjliga vinster
 
         public static void PlaceMarkerInWinConditions(string playerChoice, string currentMarker) //Metod som byter ut den motsvarande siffran på spelbrädet som en av spelarna har valt till dens spelares markör
         {
@@ -16,64 +15,69 @@ namespace TicTacToe
             char whereToPutMarker = Convert.ToChar(playerChoice);
             char marker = Convert.ToChar(currentMarker);
 
-            for (int i = 0; i < WinConditions.Length; i++) //Loopar igenom alla strängar i winConditions
+            for (int i = 0; i < GameState.WinConditions.Length; i++) //Loopar igenom alla strängar i winConditions
             {
-                for (int j = 0; j < WinConditions[i].Length; j++) //Loopar igenom alla individuella chars i varje sträng i winConditions
+                for (int j = 0; j < GameState.WinConditions[i].Length; j++) //Loopar igenom alla individuella chars i varje sträng i winConditions
                 {
                     // put marker in WinConditions array
-                    if (WinConditions[i][j] == whereToPutMarker)
+                    if (GameState.WinConditions[i][j] == whereToPutMarker)
                     {
-                        char[] winCondition = WinConditions[i].ToCharArray();
+                        char[] winCondition = GameState.WinConditions[i].ToCharArray();
                         winCondition[j] = marker;
                         string replacement = new string(winCondition);
-                        WinConditions[i] = replacement;
+                        GameState.WinConditions[i] = replacement;
                     }
                 }
             }
         }
 
-        public static void DidPlayerWin(int moveCounter)
+        public static void CheckPlayerWin()
         {
+            string? decidedWinner = null;
 
-            if (moveCounter >= 5) //Börja inte kolla efter en vinst innan 5 drag har genomförts
+            if (GameState.MoveCounter >= 5) //Börja inte kolla efter en vinst innan 5 drag har genomförts
             {
-                bool winnerIsDecided = false;
-
-                foreach (string winCondition in WinConditions)
+                foreach (string winCondition in GameState.WinConditions)
                 {
-                    DeclareWinner(winCondition, out winnerIsDecided);
-                    if(winnerIsDecided)
+                    DeclareWinner(winCondition, out decidedWinner);
+                    if (decidedWinner != null)
                     {
                         break;
                     }
                 }
             }
 
-            void DeclareWinner(string winCondition, out bool winnerIsDecided)
+            void DeclareWinner(string winCondition, out string decidedWinner)
             {
                 string? playerWhoWon = winCondition == "XXX" ? "Player1" : winCondition == "OOO" ? "Player2" : null;
                 if (playerWhoWon != null)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"{playerWhoWon} won!");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.ReadKey();
-                    //Avsluta spelet
-                    GameState.IsRunning = false;
-                    winnerIsDecided = true;
+                    decidedWinner = playerWhoWon;
                     return;
                 }
-                winnerIsDecided = false;
+                decidedWinner = null;
             }
 
-            //lägg till logik så att vi inte kommer hit ifall en vinnare har funnits
-            if (moveCounter == 9)
+            if (decidedWinner != null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{decidedWinner} won!");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                BoardController.PrintTicTacField();
+                // Kolla om en användare vill spela igen
+                GameState.TryAgain();
+            }
+            else if (GameState.MoveCounter == 9)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Game ends in a tie");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                BoardController.PrintTicTacField();
+                GameState.TryAgain();
             }
             else
             {
-                //Forsätt med spelet (endast här ifall vi ändrar från "void" till att istället returnera ett variabelvärde)
+                GameState.UpdateToNextPlayer(); //Byter till nästa spelares tur
             }
         }
 
