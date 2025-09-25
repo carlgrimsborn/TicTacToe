@@ -11,7 +11,6 @@
             int moveCounter = 0;
             while (IsRunning)
             {
-               
                 gameBoard.PrintBoard(Player.IsItPlayerOnesTurn); //Skriv ut brädet
 
                 string playerChoice = Console.ReadLine(); //Ta emot spelarens val i en sträng
@@ -35,7 +34,6 @@
                     continue; //Går tillbaka till början av loopen, så att samma spelare kan fortsätta göra ett val tills ett giltigt val har gjort
                 }
                 
-
                 checkWinner.PlaceMarkerInWinConditions(playerChoice, currentMarker); //Placerar spelarens markör i string[] med WinConditions
                 checkWinner.DidPlayerWin(moveCounter); //Ser igenom string[] WinConditions om den innehåller "xxx" eller "ooo"
 

@@ -23,9 +23,6 @@ namespace TicTacToe
                 {
                     if (WinConditions[i][j] == whereToPutMarker) 
                     {
-                        
-                        
-                        
                         char[] winConditionStringToCharArray = WinConditions[i].ToCharArray();
                         winConditionStringToCharArray[j] = playerMarker;
                         string winConditionStringWithNewMarker = new string(winConditionStringToCharArray);
@@ -47,10 +44,10 @@ namespace TicTacToe
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Player1 won!");
                         Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.ReadKey();
-                        Program.IsRunning = false;
+                        Console.ReadKey(); 
+                        Program.IsRunning = false; //Avslutar spelet
                         break;
-                        //Avsluta spelet
+                        
                     }
                     else if (winCondition == "OOO")
                     {
@@ -58,9 +55,9 @@ namespace TicTacToe
                         Console.WriteLine("Player2 won!");
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.ReadKey();
-                        Program.IsRunning = false;
+                        Program.IsRunning = false; //Avslutar spelet
                         break;
-                        //Avsluta spelet
+                        
                     }
                 }
             }
@@ -70,6 +67,8 @@ namespace TicTacToe
             if (moveCounter == 9)
             {
                 Console.WriteLine("Game ends in a tie");
+                Console.ReadKey();
+                Program.IsRunning = false; //Avslutar spelet
             }
             else
             {
