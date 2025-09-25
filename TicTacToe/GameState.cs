@@ -16,6 +16,9 @@ namespace TicTacToe
 
         public static bool IsItPlayerOnesTurn { get; set; } = true; //Bool som avgör ifall det är första spelarens tur eller ej
 
+        public static Player Player1 { get; set; } = new Player(PlayerName.Player1);
+        public static Player Player2 { get; set; } = new Player(PlayerName.Player2);
+
         public static void UpdateToNextPlayer() //Metod som kallas efter en spelare har gjort sin tur, ändrar bool värdet till det motsatta
         {
             if (IsItPlayerOnesTurn)

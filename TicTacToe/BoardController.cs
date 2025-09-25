@@ -44,7 +44,7 @@ namespace TicTacToe
             
         }
 
-        public static void UpdateBoard(int playerChoice, string playerMarker) //Tar in en spelares val på spelbrädet, som när metoden kallas konverteras från string till int och byter ut spelarens val på brädet med spelarens markör
+        public static void UpdateBoardPieces(int playerChoice, string playerMarker) //Tar in en spelares val på spelbrädet, som när metoden kallas konverteras från string till int och byter ut spelarens val på brädet med spelarens markör
         {
 
             BoardPieces[playerChoice - 1] = playerMarker; //-1 då index börjar från 0 och inte 1

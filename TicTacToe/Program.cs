@@ -21,7 +21,7 @@
 
                 if (BoardController.ValidBoardChoice(playerChoice) && playerChoice.ToUpper() != "X" && playerChoice.ToUpper() != "O") //Utöver att kolla om spelarens val finns kvar på brädet ser vi även till att hantera om användaren har skrivit in "x" eller "o". ToUpper() är för att hantera båda fallen oavsett om stor eller liten bokstav har skrivits in
                 {
-                    BoardController.UpdateBoard(int.Parse(playerChoice), currentMarker); //Konverterar strängen från playerChoice till en int så den kan användas till ett index i spelbrädets Array. 
+                    BoardController.UpdateBoardPieces(int.Parse(playerChoice), currentMarker); //Konverterar strängen från playerChoice till en int så den kan användas till ett index i spelbrädets Array. 
                     GameState.MoveCounter += 1;
                 }
                 else

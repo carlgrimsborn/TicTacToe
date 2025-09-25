@@ -33,29 +33,19 @@ namespace TicTacToe
 
         public static void CheckPlayerWin()
         {
-            string? decidedWinner = null;
+            PlayerName? decidedWinner = null;
 
             if (GameState.MoveCounter >= 5) //Börja inte kolla efter en vinst innan 5 drag har genomförts
             {
                 foreach (string winCondition in GameState.WinConditions)
                 {
-                    DeclareWinner(winCondition, out decidedWinner);
-                    if (decidedWinner != null)
+                    PlayerName? playerWhoWon = winCondition == "XXX" ? PlayerName.Player1 : winCondition == "OOO" ? PlayerName.Player2 : null;
+                    if (playerWhoWon != null)
                     {
+                        decidedWinner = playerWhoWon;
                         break;
                     }
                 }
-            }
-
-            void DeclareWinner(string winCondition, out string decidedWinner)
-            {
-                string? playerWhoWon = winCondition == "XXX" ? "Player1" : winCondition == "OOO" ? "Player2" : null;
-                if (playerWhoWon != null)
-                {
-                    decidedWinner = playerWhoWon;
-                    return;
-                }
-                decidedWinner = null;
             }
 
             if (decidedWinner != null)
@@ -64,7 +54,23 @@ namespace TicTacToe
                 Console.WriteLine($"{decidedWinner} won!");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 BoardController.PrintTicTacField();
-                // Kolla om en användare vill spela igen
+
+                // set player score
+                if (decidedWinner == PlayerName.Player1)
+                {
+                    GameState.Player1.Score += 1;
+                }
+                else
+                {
+                    GameState.Player2.Score += 1;
+                }
+
+                // print player scores
+                Console.WriteLine();
+                GameState.Player1.PrintPlayerScore();
+                GameState.Player2.PrintPlayerScore();
+                
+                // Kolla om en användaren vill spela igen
                 GameState.TryAgain();
             }
             else if (GameState.MoveCounter == 9)
@@ -77,6 +83,7 @@ namespace TicTacToe
             }
             else
             {
+                // continue game
                 GameState.UpdateToNextPlayer(); //Byter till nästa spelares tur
             }
         }
