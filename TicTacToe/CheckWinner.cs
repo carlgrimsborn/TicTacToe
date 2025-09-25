@@ -26,9 +26,9 @@ namespace TicTacToe
                         
                         
                         
-                        char[] winCondition = WinConditions[i].ToCharArray();
-                        winCondition[j] = playerMarker;
-                        string winConditionStringWithNewMarker = new string(winCondition);
+                        char[] winConditionStringToCharArray = WinConditions[i].ToCharArray();
+                        winConditionStringToCharArray[j] = playerMarker;
+                        string winConditionStringWithNewMarker = new string(winConditionStringToCharArray);
                         WinConditions[i] = winConditionStringWithNewMarker;
                     }
                 }
