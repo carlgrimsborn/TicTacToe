@@ -63,7 +63,7 @@ namespace TicTacToe
             }
             
             
-            //lägg till logik så att vi inte kommer hit ifall en vinnare har funnits
+           
             if (moveCounter == 9)
             {
                 Console.WriteLine("Game ends in a tie");
