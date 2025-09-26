@@ -21,7 +21,7 @@ namespace TicTacToe
             {
                 for (int j = 0; j < WinConditions[i].Length; j++) //Loopar igenom alla individuella chars i varje sträng i winConditions
                 {
-                    if (WinConditions[i][j] == whereToPutMarker) 
+                    if (WinConditions[i][j] == whereToPutMarker) //Om en position i strängen är lika med siffran spelaren har valt
                     {
                         char[] winConditionStringToCharArray = WinConditions[i].ToCharArray();
                         winConditionStringToCharArray[j] = playerMarker;

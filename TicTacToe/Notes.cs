@@ -23,5 +23,19 @@ namespace TicTacToe
          * 
          * 
           */
+
+
+        //Måste man tvinga decidedWinner till null eller räcker det att deklarera variabeln?
+
+        //PlayerName? playerWhoWon = winCondition == "XXX" ? PlayerName.Player1 : winCondition == "OOO" ? PlayerName.Player2 : null;
+
+
+
+        //if (winCondition == "XXX")
+        //  decidedWinner = PlayerName.Player1
+        //else if (winCondition == "OOO")
+        //  decidedWinner = PlayerName.Player2
+        //
+        // 
     }
 }
