@@ -11,6 +11,7 @@
             int moveCounter = 0;
             while (IsRunning)
             {
+
                 gameBoard.PrintBoard(); //Skriv ut brädet
 
                 string playerChoice = Console.ReadLine(); //Ta emot spelarens val i en sträng
