@@ -49,8 +49,8 @@ namespace TicTacToe
             //Kan ta bort en av dem
             foreach (string winCondition in WinConditions)
             {
-                if (winCondition.Contains(whereToPutMarker))
-                    winCondition.Replace(whereToPutMarker, playerMarker);
+                if (winCondition.Contains(whereToPutMarker)) //Om en av strängarna har siffran spelaren har valt
+                    winCondition.Replace(whereToPutMarker, playerMarker); //Byt ut siffran med spelarens markör
 
             }
         }
