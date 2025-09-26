@@ -38,8 +38,9 @@ namespace TicTacToe
 
             string[] winConditions = { "123", "456", "789", "741", "852", "963", "159", "753" };
 
-            List<Cell> markedPlayer1Cells = cells.FindAll(cell => findMarked(cell, CellOwner.Player1));
-            List<Cell> markedPlayer2Cells = cells.FindAll(cell => findMarked(cell, CellOwner.Player2));
+            // find marked cells for each player
+            List<Cell> markedPlayer1Cells = cells.FindAll(cell => cell.Owner == CellOwner.Player1);
+            List<Cell> markedPlayer2Cells = cells.FindAll(cell => cell.Owner == CellOwner.Player2);
 
             // check if the players has picked one of the right combinations in winConditions
             foreach (string winCondition in winConditions)
@@ -48,11 +49,13 @@ namespace TicTacToe
                 int matchesPlayer2 = 0;
 
                 // loop through each winCondition to see if the players has it
-                foreach (char victoryNumber in winCondition)
+                foreach (char winNumber in winCondition)
                 {
-                    int victoryNumberAsInt = victoryNumber - '0';
-                    bool p1Match = markedPlayer1Cells.Find(cell => cell.CellValue == victoryNumberAsInt) != null;
-                    bool p2Match = markedPlayer2Cells.Find(cell => cell.CellValue == victoryNumberAsInt) != null;
+                    int winNumberAsInt = winNumber - '0';
+
+                    // check if the marked cells for each player have winNumber
+                    bool p1Match = markedPlayer1Cells.Find(cell => cell.CellValue == winNumberAsInt) != null;
+                    bool p2Match = markedPlayer2Cells.Find(cell => cell.CellValue == winNumberAsInt) != null;
                     if (p1Match)
                     {
                         matchesPlayer1 += 1;
@@ -85,18 +88,6 @@ namespace TicTacToe
             }
 
         }
-        private static bool findMarked(Cell cell, CellOwner searchVariant)
-        {
-            if (cell.Owner == searchVariant)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
 
         private static void PrintBoard(List<Cell> cells)
         {
