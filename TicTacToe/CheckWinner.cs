@@ -31,7 +31,24 @@ namespace TicTacToe
                 }
             }
         }
-        
+
+        //Version2. Mycket simplare lösning och fungerar lika bra i detta fall
+        //Viktigt att tänka på är att WinConditions[i].Replace('5', 'X') byter ut ALLA char värden den kan hitta som matchar, som i detta exempel är '5' med 'X'
+        public void PlaceMarkerInWinConditionsV2(string playerChoice, string currentMarker)
+        {
+            char whereToPutMarker = Convert.ToChar(playerChoice);
+            char playerMarker = Convert.ToChar(currentMarker);
+
+            for (int i = 0; i < WinConditions.Length; i++) //Loopar igenom alla strängar i winConditions
+            {
+                if (WinConditions[i].Contains(whereToPutMarker))  //Om en av strängarna har siffran spelaren har valt
+                    WinConditions[i].Replace(whereToPutMarker, playerMarker); //Byt ut siffran med spelarens markör
+            }
+        }
+
+
+
+
         public void DidPlayerWin (int moveCounter)
         {
             
