@@ -11,7 +11,7 @@
             int moveCounter = 0;
             while (IsRunning)
             {
-                gameBoard.PrintBoard(Player.IsItPlayerOnesTurn); //Skriv ut brädet
+                gameBoard.PrintBoard(); //Skriv ut brädet
 
                 string playerChoice = Console.ReadLine(); //Ta emot spelarens val i en sträng
                 string currentMarker; //Deklarera en variabel för den nuvarande spelarens markör

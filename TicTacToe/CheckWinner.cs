@@ -37,7 +37,7 @@ namespace TicTacToe
             
             if (moveCounter >= 5) //Börja inte kolla efter en vinst innan 5 drag har genomförts
             {
-                foreach (string winCondition in WinConditions)
+                foreach (string winCondition in WinConditions) //Går igenom alla strängar i winConditions arrayen och ser om en sträng innehåller "XXX" eller "OOO"
                 {
                     if (winCondition == "XXX")
                     {
