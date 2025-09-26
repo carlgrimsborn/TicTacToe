@@ -44,6 +44,15 @@ namespace TicTacToe
                 if (WinConditions[i].Contains(whereToPutMarker))  //Om en av strängarna har siffran spelaren har valt
                     WinConditions[i].Replace(whereToPutMarker, playerMarker); //Byt ut siffran med spelarens markör
             }
+
+            //En till loop som gör exakt samma som den övre, men kanske är ännu enklare att förstå?
+            //Kan ta bort en av dem
+            foreach (string winCondition in WinConditions)
+            {
+                if (winCondition.Contains(whereToPutMarker))
+                    winCondition.Replace(whereToPutMarker, playerMarker);
+
+            }
         }
 
 
