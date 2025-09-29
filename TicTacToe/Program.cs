@@ -66,12 +66,14 @@
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Spelare 1 vinner!");
+                        Console.ForegroundColor = ConsoleColor.Gray;
                     }
 
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Spelare 2 vinner!");
+                        Console.ForegroundColor = ConsoleColor.Gray;
                     }
 
                 }
