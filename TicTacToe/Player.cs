@@ -14,6 +14,7 @@ namespace TicTacToe
         
 
 
+
         //Kan bryta ut denna nedre del till en egen klass (kanske "PlayerTurn" eller något), alternativt att ta bort hela övre delen och endast arbeta med spelarnas markörer lokalt
         public static bool IsItPlayerOnesTurn { get; set; } = true; //Bool som avgör ifall det är första spelarens tur eller ej
 
