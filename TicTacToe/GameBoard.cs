@@ -11,21 +11,6 @@ namespace TicTacToe
 
         public string[] SpelPlan { get; set; } = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        
-        public void Printspelplan()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    Console.Write(SpelPlan[i * 3 + j] + "|");
-                }
-                Console.WriteLine();
-                Console.WriteLine("------");
-            }
-        }
-
-
         public  bool CheckVictory()
         {
             Console.Clear();
@@ -42,51 +27,60 @@ namespace TicTacToe
 
 
 
-        public void PrintBoard (bool onlyShowOnce)
+        public void PrintBoard ()
         {
-            
-            if (onlyShowOnce)
-                WelcomeMessage();
-
             Console.Clear();
+
+            int j = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write($"\n\t\n\t__");
+                PrintSign(SpelPlan[j]);
+                j++;
+
+                Console.Write("__ __");
+                PrintSign(SpelPlan[j]);
+                Console.Write("__ __");
+                j++;
+
+                PrintSign(SpelPlan[j]);
+               Console.Write("__");
+                j++;
+            }
+            
+            /*
             Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[0])}__ __{PrintSign(SpelPlan[1])}__ __{PrintSign(SpelPlan[2])}__"); //självaste board i en metod
             Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[3])}__ __{PrintSign(SpelPlan[4])}__ __{PrintSign(SpelPlan[5])}__");
             Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[6])}__ __{PrintSign(SpelPlan[7])}__ __{PrintSign(SpelPlan[8])}__");
             Console.ForegroundColor = ConsoleColor.Gray;
-
-            
-
-
+            */
         }
 
-        public string PrintSign (string sign)
+        public void PrintSign (string sign)
         {
             switch (sign)
             {
                 case "X":
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    return sign;
+                    Console.Write(sign);
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
                     
 
                 case "O":
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    return sign;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(sign);
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
 
                 default:
-                    Console.ForegroundColor = ConsoleColor.White;
-                    return sign;
+                    Console.Write(sign);
+                    break;
             }
              
         }
 
-        public void WelcomeMessage ()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\n\t\n\tVälkommen till TicTacToe!!!!");
-            Console.ReadKey();
-            Console.WriteLine("\n\t\n\tTvå spelare ska ska mata in tal 1-9 tills de får tre i rad.");
-            Console.ReadKey();
-        }
+
 
        
     }
