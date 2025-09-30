@@ -14,7 +14,7 @@ namespace TicTacToe
 
         public static bool ShouldGameKeepRunning(string[] board)
         {
-            return !GameActions.DidPlayerWin(board) && NumTurns != 9;
+            return !GameActions.CheckVictory(board) && NumTurns != 9;
         }
     }
 }

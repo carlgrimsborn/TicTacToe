@@ -4,25 +4,25 @@
     {
 
 
-        static void Main(string[] args)
+        static void Main(string[] args) //Carl
         {
             {
-                GameBoard gameBoard = new GameBoard();
+                GameBoard gameBoard = new GameBoard(); //Thomas
 
-                while (GameState.ShouldGameKeepRunning(gameBoard.Board))
+                while (GameState.ShouldGameKeepRunning(gameBoard.Board)) //Margret (checkwinner)
                 {
                     if (!GameState.HasPrintedWelcomeMessage)
                         PrintText.WelcomeMessage();
                     
-                    gameBoard.PrintBoard();
+                    gameBoard.PrintBoard(); //Emilia
                     PrintText.TurnIndicator();
                     PrintText.ChoosePosition();
                     GameActions.HandleUserInput(gameBoard);
                 }
 
                 // Visa slutresultat
-                gameBoard.PrintBoard();
-                if (GameActions.DidPlayerWin(gameBoard.Board))
+                gameBoard.PrintBoard(); //Thomas
+                if (GameActions.CheckVictory(gameBoard.Board))
                 {
                     gameBoard.PrintBoard();
                     PrintText.AnnounceWinner();
@@ -31,7 +31,7 @@
                 else
                 {
                     gameBoard.PrintBoard();
-                    PrintText.announceTie();
+                    PrintText.AnnounceTie();
                 }
                     
                 Console.ReadKey();

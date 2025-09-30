@@ -66,7 +66,7 @@ namespace TicTacToe
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
-        public static void announceTie ()
+        public static void AnnounceTie ()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\n\t\n\tOavgjort!");
