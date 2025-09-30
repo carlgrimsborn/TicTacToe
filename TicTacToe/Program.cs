@@ -2,22 +2,17 @@
 {
     internal class Program
     {
-       
 
         static void Main(string[] args)
         {
             {
                 GameBoard board = new GameBoard();
-                bool player1Turn = true;
-                int numTurns = 0;
-                bool onlyShowOnce = true;
-                
-                while (!board.CheckVictory() && numTurns != 9)
+
+                do
                 {
-                    board.PrintBoard(onlyShowOnce);
-                    onlyShowOnce = false;
-                    
-                    if (player1Turn)
+                    board.PrintBoard(State.NumTurns == 0);
+
+                    if (State.Player1Turn)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Spelare 1:s tur");
@@ -30,19 +25,19 @@
                         Console.ForegroundColor = ConsoleColor.Gray;
                     }
 
-                    Console.Write("Välj position (1-9): ");
+                    Console.Write("\n\tVälj position (1-9): ");
                     string choice = Console.ReadLine();
 
                     if (board.SpelPlan.Contains(choice) && choice != "X" && choice != "O")
                     {
                         int spelplanIndex = Convert.ToInt32(choice) - 1;
-                        if (player1Turn)
+                        if (State.Player1Turn)
                             board.SpelPlan[spelplanIndex] = "X";
                         else
                             board.SpelPlan[spelplanIndex] = "O";
 
-                        player1Turn = !player1Turn;
-                        numTurns++; // Öka antalet drag
+                        State.Player1Turn = !State.Player1Turn;
+                        State.NumTurns += 1; // Öka antalet drag
                     }
                     else
                     {
@@ -51,14 +46,15 @@
                         Console.WriteLine("Ogiltigt val! Försök igen.");
                         Console.ForegroundColor = ConsoleColor.Gray;
                     }
-                }
+                    board.CheckVictory();
 
-                // Visa slutresultat
-                board.Printspelplan();
-                if (board.CheckVictory())
+                } while (State.GameRunning);
+
+                if (State.GameRunning == false)
                 {
-                    if (!player1Turn) // Den som nyss spelade
-
+                    // Visa slutresultat
+                    board.PrintBoard(false);
+                    if (!State.Player1Turn) // Den som nyss spelade
                         Console.WriteLine("Spelare 1 vinner!");
                     else
                         Console.WriteLine("Spelare 2 vinner!");

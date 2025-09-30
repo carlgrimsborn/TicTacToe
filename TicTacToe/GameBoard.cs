@@ -11,22 +11,7 @@ namespace TicTacToe
 
         public string[] SpelPlan { get; set; } = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        
-        public void Printspelplan()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    Console.Write(SpelPlan[i * 3 + j] + "|");
-                }
-                Console.WriteLine();
-                Console.WriteLine("------");
-            }
-        }
-
-
-        public  bool CheckVictory()
+        public  void CheckVictory()
         {
             Console.Clear();
             bool row1 = SpelPlan[0] == SpelPlan[1] && SpelPlan[1] == SpelPlan[2];
@@ -37,25 +22,25 @@ namespace TicTacToe
             bool col3 = SpelPlan[2] == SpelPlan[5] && SpelPlan[5] == SpelPlan[8];
             bool diagDown = SpelPlan[0] == SpelPlan[4] && SpelPlan[4] == SpelPlan[8];
             bool diagUp = SpelPlan[6] == SpelPlan[4] && SpelPlan[4] == SpelPlan[2];
-            return row1 || row2 || row3 || col1 || col2 || col3 || diagDown || diagUp;
+            bool winConditionFulfilled = row1 || row2 || row3 || col1 || col2 || col3 || diagDown || diagUp;
+            if (winConditionFulfilled && State.NumTurns != 9)
+            {
+                State.GameRunning = false;
+            }
         }
 
-
-
-        public void PrintBoard (bool onlyShowOnce)
+        public void PrintBoard (bool isFirstTurn)
         {
             
-            if (onlyShowOnce)
+            if (isFirstTurn)
                 WelcomeMessage();
 
             Console.Clear();
-            Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[0])}__ __{PrintSign(SpelPlan[1])}__ __{PrintSign(SpelPlan[2])}__"); //självaste board i en metod
-            Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[3])}__ __{PrintSign(SpelPlan[4])}__ __{PrintSign(SpelPlan[5])}__");
-            Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[6])}__ __{PrintSign(SpelPlan[7])}__ __{PrintSign(SpelPlan[8])}__");
-            Console.ForegroundColor = ConsoleColor.Gray;
-
+            Console.Write("\n\t\n\t"); Console.Write($"__{PrintSign(SpelPlan[0])}__"); Console.Write($" __{PrintSign(SpelPlan[1])}__ "); Console.Write($"__{PrintSign(SpelPlan[2])}__"); //självaste board i en metod
+            Console.Write("\n\t\n\t"); Console.Write($"__{PrintSign(SpelPlan[3])}__"); Console.Write($" __{PrintSign(SpelPlan[4])}__ "); Console.Write($"__{PrintSign(SpelPlan[5])}__");
+            Console.Write("\n\t\n\t"); Console.Write($"__{PrintSign(SpelPlan[6])}__"); Console.Write($" __{PrintSign(SpelPlan[7])}__ "); Console.Write($"__{PrintSign(SpelPlan[8])}__\n\t\n\t");
             
-
+            Console.ForegroundColor = ConsoleColor.Gray;
 
         }
 
@@ -65,18 +50,15 @@ namespace TicTacToe
             {
                 case "X":
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    return sign;
-                    
-
+                    break;
                 case "O":
                     Console.ForegroundColor = ConsoleColor.Red;
-                    return sign;
-
+                    break;
                 default:
                     Console.ForegroundColor = ConsoleColor.White;
-                    return sign;
+                    break;
             }
-             
+            return sign;
         }
 
         public void WelcomeMessage ()
@@ -88,6 +70,5 @@ namespace TicTacToe
             Console.ReadKey();
         }
 
-       
     }
 }
