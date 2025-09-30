@@ -9,51 +9,42 @@ namespace TicTacToe
     internal class GameBoard
     {
 
-        public string[] SpelPlan { get; set; } = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        public string[] Board { get; set; } = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
         public  bool CheckVictory()
         {
             Console.Clear();
-            bool row1 = SpelPlan[0] == SpelPlan[1] && SpelPlan[1] == SpelPlan[2];
-            bool row2 = SpelPlan[3] == SpelPlan[4] && SpelPlan[4] == SpelPlan[5];
-            bool row3 = SpelPlan[6] == SpelPlan[7] && SpelPlan[7] == SpelPlan[8];
-            bool col1 = SpelPlan[0] == SpelPlan[3] && SpelPlan[3] == SpelPlan[6];
-            bool col2 = SpelPlan[1] == SpelPlan[4] && SpelPlan[4] == SpelPlan[7];
-            bool col3 = SpelPlan[2] == SpelPlan[5] && SpelPlan[5] == SpelPlan[8];
-            bool diagDown = SpelPlan[0] == SpelPlan[4] && SpelPlan[4] == SpelPlan[8];
-            bool diagUp = SpelPlan[6] == SpelPlan[4] && SpelPlan[4] == SpelPlan[2];
+            bool row1 = Board[0] == Board[1] && Board[1] == Board[2];
+            bool row2 = Board[3] == Board[4] && Board[4] == Board[5];
+            bool row3 = Board[6] == Board[7] && Board[7] == Board[8];
+            bool col1 = Board[0] == Board[3] && Board[3] == Board[6];
+            bool col2 = Board[1] == Board[4] && Board[4] == Board[7];
+            bool col3 = Board[2] == Board[5] && Board[5] == Board[8];
+            bool diagDown = Board[0] == Board[4] && Board[4] == Board[8];
+            bool diagUp = Board[6] == Board[4] && Board[4] == Board[2];
             return row1 || row2 || row3 || col1 || col2 || col3 || diagDown || diagUp;
         }
-
-
 
         public void PrintBoard ()
         {
             Console.Clear();
 
-            int j = 0;
-            for (int i = 0; i < 3; i++)
+            int index = 0;
+            for (int row = 1; row <= 3; row++)
             {
                 Console.Write($"\n\t\n\t__");
-                PrintSign(SpelPlan[j]);
-                j++;
+                PrintSign(Board[index]);
+                index++;
 
                 Console.Write("__ __");
-                PrintSign(SpelPlan[j]);
+                PrintSign(Board[index]);
                 Console.Write("__ __");
-                j++;
+                index++;
 
-                PrintSign(SpelPlan[j]);
+                PrintSign(Board[index]);
                Console.Write("__");
-                j++;
+                index++;
             }
-            
-            /*
-            Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[0])}__ __{PrintSign(SpelPlan[1])}__ __{PrintSign(SpelPlan[2])}__"); //självaste board i en metod
-            Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[3])}__ __{PrintSign(SpelPlan[4])}__ __{PrintSign(SpelPlan[5])}__");
-            Console.WriteLine($"\n\t\n\t__{PrintSign(SpelPlan[6])}__ __{PrintSign(SpelPlan[7])}__ __{PrintSign(SpelPlan[8])}__");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            */
         }
 
         public void PrintSign (string sign)
@@ -77,11 +68,6 @@ namespace TicTacToe
                     Console.Write(sign);
                     break;
             }
-             
         }
-
-
-
-       
     }
 }
