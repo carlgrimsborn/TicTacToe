@@ -22,13 +22,19 @@
 
                 // Visa slutresultat
                 gameBoard.PrintBoard();
-                if (CheckWinner.DidPlayerWin(gameBoard.Board))
+                if (GameActions.DidPlayerWin(gameBoard.Board))
+                {
+                    gameBoard.PrintBoard();
                     PrintText.AnnounceWinner();
+                }
+                
                 else
+                {
+                    gameBoard.PrintBoard();
                     PrintText.announceTie();
+                }
+                    
                 Console.ReadKey();
-
-
             }
         }
 

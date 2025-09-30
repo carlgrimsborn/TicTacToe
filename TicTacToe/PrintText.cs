@@ -20,6 +20,7 @@ namespace TicTacToe
 
         public static void TurnIndicator ()
         {
+            Console.WriteLine();
             if (GameState.Player1Turn)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -31,8 +32,7 @@ namespace TicTacToe
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\n\tSpelare 2:s tur");
                 Console.ForegroundColor = ConsoleColor.Gray;
-            }
-                
+            }                
         }
 
         public static void ChoosePosition ()
@@ -56,20 +56,20 @@ namespace TicTacToe
             if (!GameState.Player1Turn)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("Spelare 1 vinner!");
+                Console.WriteLine("\n\t\n\tSpelare 1 vinner!");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Spelare 2 vinner!");
+                Console.WriteLine("\n\t\n\tSpelare 2 vinner!");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
         public static void announceTie ()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Oavgjort!");
+            Console.WriteLine("\n\t\n\tOavgjort!");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
     }

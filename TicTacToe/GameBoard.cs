@@ -43,7 +43,6 @@ namespace TicTacToe
                     Console.ForegroundColor = ConsoleColor.Gray;
                     break;
                     
-
                 case "O":
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(sign);
